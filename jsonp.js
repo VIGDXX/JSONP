@@ -2,10 +2,11 @@
  * @author vigdxx@gmail.com
  * @param {{String}} url
  * @param {{Object}} data
+ * @param {{String}} callbackQueryKey
  * @param {{Function}} callback
  */
 
-function JSONP(url,data,callback) {
+function JSONP(url,data,callbackKey = 'callback',callback) {
 	let script = document.createElement('script')
 	let body = document.body
 	if(typeof JSONP.index !== 'number' ) {
@@ -32,6 +33,6 @@ function JSONP(url,data,callback) {
 		document.removeChild(script)
 		delete JSONP[callbackName]
 	}
-	script.src = url + query + `callback=JSONP.${callbackName}`
+	script.src = url + query + `${callbackQueryKey}=JSONP.${callbackName}`
 	body.appendChild(script)
 }
